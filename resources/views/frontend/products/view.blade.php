@@ -39,8 +39,8 @@
                 </h2>
 
                 <hr>
-                <label for="" class="me-3">Original Price :<del> Rs {{$products->original_price}} </del></label>
-                <label for="" class="fw-bold">Selling Price : Rs {{$products->selling_price}}</label>  
+                <label for="" class="me-3">Original Price : <del>{{$products->original_price}} $</del></label>
+                <label for="" class="fw-bold">Selling Price :{{$products->selling_price}} $</label>  
                 <p class="mt-3 ">
                     {!! $products->small_description !!} 
                 </p>

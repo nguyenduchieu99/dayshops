@@ -2,26 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\FrontentController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Models\Product;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\CartController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\Frontend\CheckoutController;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
 
 Route::get('/',[FrontendController::class,'index']);
 Route::get('category',[FrontendController::class,'category']);
@@ -31,16 +20,15 @@ Route::get('category/{cate_slug}/{prod_slug}',[FrontendController::class,'viewpr
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('add-to-car',[CartController::class,'addProduct']);
+Route::post('delete-cart-item',[CartController::class,'deleteproducts']);
+Route::post('update-cart',[CartController::class,'updatecart']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('cart',[CartController::class,'viewcart']);
+    Route::get('checkout',[CheckoutController::class,'index']);
+
 });
-
-Route::post('add-to-car',[CartController::class,'addProduct']);
-Route::post('delete-cart-item',[CartController::class,'deleteproducts']);
-
-
-
 
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {

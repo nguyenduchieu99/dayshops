@@ -14,7 +14,7 @@
                 <div class="owl-carousel owl-theme" >
                     @foreach ($featured_products as $prod)
                     <div class="item">
-                        <a href="{{url('category/'.$prod->category->name.'/'.$prod->slug)}}">
+                        <a href="{{url('category/'.$prod->category->slug.'/'.$prod->slug)}}">
                             <div class="card">
                                 <img src="{{asset('assets/uploads/products/'.$prod->image)}}" class="lazy img-responsive" alt="Product Image">
                                 <div class="card-body">

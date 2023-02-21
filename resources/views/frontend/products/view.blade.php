@@ -46,10 +46,10 @@
                 </p>
                 <hr>
 
-                @if ($products->qty >0)
+                @if ($products->qty > 0)
                     <label for="" class="badge bg-success">In stock</label>
                 @else
-                    <label for="" class="badge bg-success">Out of stock</label>
+                    <label for="" class="badge bg-danger">Out of stock</label>
                 @endif
                 <div class="row mt-2">
                     <div class="col-md-3">
@@ -63,12 +63,14 @@
                     </div>
                     <div class="col-md-9">
                         <br/>
-                        <button type="button" class="btn btn-success me-3 addToCartBtn float-start">Add to WishList <i class="fa fa-heart"></i></button>
-                        <button type="button" class="btn btn-primary me-3 float-start">Add to Card <i class="fa fa-shopping-cart"></i></button>
+                        @if ($products->qty > 0)
+                            <button type="button" class="btn btn-primary me-3 addToCartBtn float-start">Add to Card<i class="fa fa-shopping-cart"></i></button>
+                            <button type="button" class="btn btn-success me-3  float-start">Add to WishList <i class="fa fa-heart"></i></button>
+                        @else
+                             <button type="button" class="btn btn-success me-3  float-start">Add to WishList <i class="fa fa-heart"></i></button>
+                        @endif
                     </div>
-
                 </div>
-
             </div>
         </div>
         <div class="col-md-12">

@@ -37,12 +37,18 @@
                 </div>
                 <div class="col-md-3 my-auto">
                     <input type="hidden" class="prod_id" value="{{ $item->prod_id }}">
-                    <label for="Quantity">Quantity</label>
-                    <div class="input-group text-center mb-3" style="width:40%;">
-                        <button class="input-group-text changeQuantity decrement-btn">-</button>
-                        <input type="text" name="quantity" value="{{$item->prod_qty}}" class="form-control qty-input text-center">
-                        <button class="input-group-text changeQuantity increment-btn">+</button>
-                    </div>
+                    @if ($item->products->qty >= $item->prod_qty)
+                        <label for="Quantity">Quantity</label>
+                        <div class="input-group text-center mb-3" style="width:40%;">
+                            <button class="input-group-text changeQuantity decrement-btn">-</button>
+                            <input type="text" name="quantity" value="{{$item->prod_qty}}" class="form-control qty-input text-center">
+                            <button class="input-group-text changeQuantity increment-btn">+</button>
+                        </div>
+                    @else
+                        <h6>Out of Stock</h6>
+                        
+                    @endif
+                 
                 </div>
                 <div class="col-md-2 my-auto">
                     <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"> </i> Remote</button>

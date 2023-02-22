@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
@@ -54,6 +55,13 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::put('update-product/{id}',[ProductController::class ,'update']);
     Route::get('delete-product/{id}',[ProductController::class,'destroy']);
 
-    Route::get('users',[FrontendController::class,'users']);
     Route::get('orders',[OrderController::class,'index']);
+    Route::get('admin/view-order/{id}',[OrderController::class,'view']);
+    Route::put('update-order/{id}',[OrderController::class,'updateorder']);
+    Route::get('order-history',[OrderController::class,'orderhistory']);
+
+    Route::get('users',[DashboardController::class,'users']);
+    Route::get('view-user/{id}',[DashboardController::class,'view']);
+
+
  });

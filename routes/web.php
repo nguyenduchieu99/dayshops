@@ -8,7 +8,10 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Frontend\RatingController;
+use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Frontend\WishlistController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -22,10 +25,17 @@ Route::get('category/{cate_slug}/{prod_slug}',[FrontendController::class,'viewpr
 
 Auth::routes();
 
+Route::get('load-cart-data',[CartController::class,'cartcount']);
+Route::get('load-wishlist-data',[WishlistController::class,'wishlistcount']);
+
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('add-to-car',[CartController::class,'addProduct']);
 Route::post('delete-cart-item',[CartController::class,'deleteproducts']);
 Route::post('update-cart',[CartController::class,'updatecart']);
+
+Route::post('add-to-wishlist',[WishlistController::class,'add']);
+Route::post('delete-wishlist-item',[WishlistController::class,'delete']);
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('cart',[CartController::class,'viewcart']);
@@ -35,6 +45,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('my-orders',[UserController::class,'index']);
     Route::get('view-order/{id}',[UserController::class,'view']);
 
+    Route::get('wishlist',[WishlistController::class,'index']);
+
+    // Route::post('procced-to-pay',[CheckoutController::class,'razorpay']);
+
+    Route::post('add-rating',[RatingController::class,'add']);
+
+    Route::get('add-review/{product_slug}/user-review',[ReviewController::class,'add']);
+    Route::post('add-review',[ReviewController::class,'create']);
+    Route::get('edit-review/{product_slug}/user-review',[ReviewController::class,'edit']);
+    Route::put('update-review',[ReviewController::class,'update']);
 });
 
 
